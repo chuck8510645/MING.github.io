@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="./color.js"></script>
+  <style>
+    /* Style the tab */
+    .tab {
+      overflow: hidden;
+      border: 1px solid #ccc;
+      background-color: #f1f1f1;
+    }
+
+    /* Style the buttons inside the tab */
+    .tab button {
+      background-color: inherit;
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      transition: 0.5s;
+      font-size: 17px;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+      background-color: #ddd;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+      background-color: #ccc;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+      display: none;
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-top: none;
+    }
+
+    #changecolor,
+    #white,
+    #black {
+      cursor: pointer;
+      outline: none;
+      background-color: rgba(161, 160, 160, 0.877);
+      border: 0;
+      border-radius: 5px;
+    }
+
+    /* #time {
+      position: relative;
+      top: -45px;
+      left: 50px;
+    } */
+
+    /* .tab {
+      position: relative;
+      top: -50px;
+    } */
+  </style>
+
+</head>
+
+<body id="myDiv" onload="ShowTime()">
+  <h1>Welcome to MING's game</h1>
+  <h3>
+    <p id="time"></p>
+  </h3>
+  <div class="tab">
+    <button class="tablinks" onclick="opengame(event, 'G1')"><b>Game1</b></button>
+    <button class="tablinks" onclick="opengame(event, 'G2')"><b>Game2</b></button>
+    <button class="tablinks" onclick="opengame(event, 'G3')"><b>Game3</b></button>
+  </div>
+
+  <div id="G1" class="tabcontent">
+    <iframe width=1000 height=420 frameborder=0 scrolling=no src=/ST1.html></iframe>
+  </div>
+
+  <div id="G2" class="tabcontent">
+    <iframe width=1000 height=450 frameborder=0 scrolling=no src=/ST2.html></iframe>
+  </div>
+
+  <div id="G3" class="tabcontent">
+    <iframe width=1000 height=450 frameborder=0 scrolling=no src=/ST3.html></iframe>
+  </div>
+
+  <button id="changecolor" onclick="setColor()">Click me!</button>
+  <button id="white" onclick="white()">Light</button>
+  <button id="black" onclick="black()">Dark</button>
+
+  <script>
+    // show time
+    function ShowTime() {
+      var D = new Date(),
+        y = D.getFullYear(),
+        m = D.getMonth() + 1,
+        d = D.getDate(),
+        w = D.getDay(),
+        h = D.getHours(),
+        min = D.getMinutes(),
+        s = D.getSeconds();
+      var ampm;
+      if (h < 12) {
+        ampm = "上午";
+      } else {
+        ampm = "下午";
+      }
+      document.getElementById('time').innerHTML = y + "/" + m + "/" + d + " " + ampm + " " + h % 12 + ':' + min + ':' + s;
+      setTimeout('ShowTime()', 1000);
+    }
+
+    function opengame(evt, gameName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace("active", "");
+      }
+      document.getElementById(gameName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+  </script>
+
+</body>
+
+</html>
